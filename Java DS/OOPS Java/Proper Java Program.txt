@@ -1,0 +1,117 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt(); //size of array
+        
+        Student[] students = new Student[n];
+        
+        for(int i = 0 ;i<students.length;i++)
+        {
+            //read values for each student object
+            
+            int id = sc.nextInt();sc.nextLine();
+            String name = sc.nextLine();
+            double marks = sc.nextDouble();
+            
+            students[i] = new Student(id,name,marks);
+        }
+        
+        Student[] result = studentsWithMarksMoreThanAvg(students);
+        
+        for(Student s : result)
+        {
+            System.out.println(s.getId() + " " + s.getName() + " " + s.getMarks());
+        }
+    }
+    
+    public static Student[] studentsWithMarksMoreThanAvg(Student[] students)
+    {
+        double avg = findAvg(students);
+        
+        int count = 0;
+        
+        for(Student s: students)
+        {
+            if(s.getMarks()>avg)
+                count++;
+        }
+        
+        Student[] result = new Student[count];
+        
+        int j = 0;
+        
+        for(Student s: students)
+        {
+            if(s.getMarks()>avg)
+                result[j++]= s;
+        }
+        
+        return result;
+    }
+    
+    public static double findAvg(Student[] students)
+    {
+        double sum = 0;
+        
+        //foreach loop
+        for(Student s:students) //5 elements
+        {
+            //loop will run as per size of the array
+            //in each iteration s will point to specific element
+            sum = sum + s.getMarks();
+        }
+        
+        return sum/students.length;
+    }
+}
+
+class Student
+{
+    private int id;
+    private String name;
+    private double marks;
+    
+    public Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+    
+    
+}
+
+
+
+
+

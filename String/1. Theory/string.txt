@@ -1,0 +1,116 @@
+
+int length=strlen(s);//returns length  	s.length()
+
+
+strcpy(s1,s2);//s1-destiantion s2-source   s1=s2;
+
+
+int j=strcmp(s1,s2);//0 if they are same    s1.compare(s2);
+
+
+
+strcat(s1,s2);//s1+s2     s1.append(s2);
+
+//to upper and lower case
+  
+int main() 
+{ 
+    // su is the string which is converted to uppercase 
+    string su = "Jatin Goyal"; 
+  
+    // using transform() function and ::toupper in STL 
+    transform(su.begin(), su.end(), su.begin(), ::toupper); 
+    cout << su << endl; 
+  
+    // sl is the string which is converted to lowercase 
+    string sl = "Jatin Goyal"; 
+  
+    // using transform() function and ::tolower in STL 
+    transform(sl.begin(), sl.end(), sl.begin(), ::tolower); 
+    cout << sl << endl; 
+  
+    return 0; 
+} 
+
+
+----------------------------------------------------------------------
+
+
+string str; 
+  
+    // Taking string input using getline() 
+    // "geeks for geek" in givin output 
+    getline(cin,str);
+
+----------------------------------------------------------------------
+
+
+
+
+// Declaring reverse iterator 
+    std::string::reverse_iterator it1; 
+
+   cout << "The reverse string using reverse iterators is : "; 
+    for (it1=str.rbegin(); it1!=str.rend(); it1++) 
+    cout << *it1; 
+    cout << endl; 
+------------------------------------------------------------------------
+
+
+copy(“char array”, len, pos) :- This function copies the substring in target character array mentioned in its arguments. 
+It takes 3 arguments, target char array, length to be copied and starting position in string to start copying.
+
+str1.copy(ch,13,0);
+-----------------------------------------------------------------------------
+
+swap() :- This function swaps one string with other.
+
+str1.swap(str2); 
+------------------------------------------------------------------------
+
+//append same as concatanate
+
+str6.append(" extension"); 
+    //  same as str6 += " extension" 
+  
+    // another version of append, which appends part of other 
+    // string 
+    str4.append(str6, 0, 6);  // at 0th position 6 character 
+
+------------------------------------------------------------------------------
+//  find returns index where pattern is found. 
+    //  If pattern is not there it returns predefined 
+    //  constant npos whose value is -1 
+
+if (str6.find(str4) != string::npos) 
+        cout << "str4 found in str6 at " << str6.find(str4) 
+             << " pos" << endl; 
+    else
+        cout << "str4 not found in str6" << endl; 
+------------------------------------------------------------------------------------
+
+ //  replace(a, b, str)  replaces b characters from a index by str 
+    str6.replace(2, 7, "ese are test"); 
+
+-------------------------------------------------------------------------------------
+
+
+char* token = strtok(str, "-"); 
+  
+    // Keep printing tokens while one of the 
+    // delimiters present in str[]. 
+    while (token != NULL) { 
+        printf("%s\n", token); 
+        token = strtok(NULL, "-"); 
+    } 
+
+----------------------------------------------------------------------------------------
+
+
+ // Take any string 
+    string s1 = "Geeks"; 
+  
+    // Copy three characters of s1 (starting  
+    // from position 1) 
+    string r = s1.substr(1, 3); 
+----------------------------------------------------------------------------------------

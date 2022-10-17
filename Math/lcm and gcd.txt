@@ -1,0 +1,18 @@
+int gcd(int a,int b)
+{
+    if(b==0)
+    return a;
+    return gcd(b,a%b);
+}
+---------------------------------------------------------------------------
+LCM=  (a*b)/gcd(a,b)
+ int c=max(a,b);
+	   int f=c;
+	    while(1)
+	    {    
+	           if((c%a==0)&&(c%b==0))
+	           break;
+	           c+=f;
+	          // cout<<c<<endl;
+	    }
+cout<<c<<" ";

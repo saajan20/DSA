@@ -1,0 +1,77 @@
+A subarray is a contiguous part of array. An array that is inside another array. For example, consider the array [1, 2, 3, 4], There are 10 non-empty sub-arrays.
+The subarrays are (1), (2), (3), (4), (1,2), (2,3), (3,4), (1,2,3), (2,3,4) and (1,2,3,4). 
+In general, for an array/string of size n, there are n*(n+1)/2 non-empty subarrays/substrings
+
+The looping approach: https://www.geeksforgeeks.org/subarraysubstring-vs-subsequence-and-programs-to-generate-them/
+
+/* C++ code to generate all possible subarrays/subArrays
+	Complexity- O(n^3) */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// Prints all subarrays in arr[0..n-1]
+void subArray(int arr[], int n)
+{
+	// Pick starting point
+	for (int i=0; i <n; i++)
+	{
+		// Pick ending point
+		for (int j=i; j<n; j++)
+		{
+			// Print subarray between current starting
+			// and ending points
+			for (int k=i; k<=j; k++)
+				cout << arr[k] << " ";
+
+			cout << endl;
+		}
+	}
+}
+
+// Driver program
+int main()
+{
+	int arr[] = {1, 2, 3, 4};
+	int n = sizeof(arr)/sizeof(arr[0]);
+	cout << "All Non-empty Subarrays\n";
+	subArray(arr, n);
+	return 0;
+}
+
+
+The recursive approach: https://www.geeksforgeeks.org/generating-subarrays-using-recursion/
+
+O(2^n)
+Approach: We use two pointers start and end to maintain the starting and ending point of the array and follow the steps given below: 
+
+Stop if we have reached the end of the array
+Increment the end index if start has become greater than end
+Print the subarray from index start to end and increment the starting index
+
+To sum up, we print from start to end starting from (0,0) then increment start and follow above points.
+
+void printSubArrays(vector<int> arr, int start, int end)
+{
+    // Stop if we have reached the end of the array
+    if (end == arr.size())
+        return;
+    // Increment the end point and start from 0
+    else if (start > end)
+        printSubArrays(arr, 0, end + 1);
+    // Print the subarray and increment the starting point
+    else {
+        cout << "[";
+        for (int i = start; i < end; i++)
+            cout << arr[i] << ", ";
+        cout << arr[end] << "]" << endl;
+        printSubArrays(arr, start + 1, end);
+    }
+}
+ 
+int main()
+{
+    vector<int> arr = { 1, 2, 3 };
+    printSubArrays(arr, 0, 0);
+    return 0;
+}

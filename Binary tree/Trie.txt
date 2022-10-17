@@ -1,0 +1,98 @@
+#include <bits/stdc++.h>
+#include <string.h>
+using namespace std;
+struct Trienode{
+    map <char,Trienode*> child;
+    bool end;
+    int freq;
+      Trienode(){
+          end=false;
+          freq=0;
+      }
+        
+};
+Trienode *root;
+void insert(string word)
+{   int i;
+    Trienode *temp=root,*node;
+    for(i=0;i<word.length();i++)
+    {
+        node=temp->child[word[i]];
+        if(node==NULL)
+        {
+            node=new Trienode();
+            temp->child[word[i]]=node;
+        }
+        
+        node->freq++;
+        temp=node;
+    }
+    temp->end=true;
+}
+
+
+
+string pre(string word)
+{
+    int i;
+    Trienode *temp=root,*node;
+    string s="";
+    for(i=0;i<word.length();i++)
+    {   s+=word[i];
+        node=temp->child[word[i]];
+        int size=node->freq;
+        if(size<=1)
+        return s;
+        temp=node;
+    }
+}
+
+bool search(string word){
+    int i;
+    Trienode *temp=root,*node;
+    for(i=0;i<word.length();i++)
+    {
+        node=temp->child[word[i]];
+        if(node==NULL)
+        return false;
+        temp=node;
+    }
+  return temp->end;
+}
+
+private boolean delete(TrieNode current, String word, int index) {
+        if (index == word.length()) {
+            //when end of word is reached only delete if currrent.endOfWord is true.
+            if (!current.endOfWord) {
+                return false;
+            }
+            current.endOfWord = false;
+            //if current has no other mapping then return true
+            return current.children.size() == 0;
+        }
+        char ch = word.charAt(index);
+        TrieNode node = current.children.get(ch);
+        if (node == null) {
+            return false;
+        }
+        boolean shouldDeleteCurrentNode = delete(node, word, index + 1);
+
+        //if true is returned then delete the mapping of character and trienode reference from map.
+        if (shouldDeleteCurrentNode) {
+            current.children.remove(ch);
+            //return true if no mappings are left in the map.
+            return current.children.size() == 0;
+        }
+        return false;
+    }
+int main()
+{
+    root=new Trienode();
+    string arr[] = {"bearcat", "bert"}; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+    for (int i = 0; i<n; i++) 
+    insert(arr[i]);
+    for (int i = 0; i<n; i++) 
+     cout<<pre(arr[i])<<endl;
+    
+}

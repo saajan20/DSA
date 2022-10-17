@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int max_inbetween_left_right(int a[],int l,int m,int r)
+{
+    int left_,right_,i;
+    left_=right_=INT_MIN;
+    int s=0;
+    for(i=m;i>=l;i--)
+    {
+       s+=a[i];
+       left_=max(s,left_);
+    }
+    
+      s=0;
+    for(i=m+1;i<=r;i++)
+    {
+       s+=a[i];
+       right_=max(s,right_);
+    }
+
+return (left_+right_);    
+    
+    
+    
+}
+int maxsum(int a[],int l,int r)
+{
+     if(l==r)
+     return a[l];
+     
+     int m=(l+r)/2;
+     
+     int left=maxsum(a,l,m);
+     int right=maxsum(a,m+1,r);
+     int bet=max_inbetween_left_right(a,l,m,r);
+     
+     return max(bet,max(left,right));
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+	    int n;
+	    cin>>n;
+	    int i,a[n];
+	    for(i=0;i<n;i++)
+	    cin>>a[i];
+	    
+	    cout<<maxsum(a,0,n-1)<<endl;
+	    
+	 }
+	return 0;
+}

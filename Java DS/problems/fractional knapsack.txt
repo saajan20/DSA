@@ -1,0 +1,75 @@
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+	public static void main (String[] args) {
+		//code
+		int n,t,w;
+		Scanner sc=new Scanner(System.in);
+		t=sc.nextInt();
+		while(t-->0)
+		{
+		   n=sc.nextInt(); 
+		   w=sc.nextInt();
+		   int i;
+		   po arr[]=new po[n];
+		   for(i=0;i<n;i++)
+		   {
+		       int a=sc.nextInt();
+		       int b=sc.nextInt();
+		       arr[i]=new po(a,b);
+		   }
+		   
+		     Arrays.sort(arr, new Comparator<po>()  
+        { 
+            @Override
+            public int compare(po o1, po o2)  
+            { 
+                return o2.ratio.compareTo(o1.ratio); 
+            } 
+        }); 
+		    double j=f(n,w,arr);
+		   System.out.format("%.2f\n",j);
+		}
+	}
+	
+	public static double f(int n, int w, po arr[])
+	{  
+	    int capacity=w;
+	    double sum=0d;
+	    for(po i:arr)
+	    {   
+	        if((capacity-i.weight)>=0)
+	        {
+	        capacity-=i.weight;
+	        sum+=i.value;
+	        }
+	        else{
+	            double rem = capacity*i.ratio;
+	            sum+=rem;
+	            break;
+	        }
+	    }
+	    
+	    return sum;
+	}
+	
+	
+}
+
+class po
+{
+    int value;
+    int weight;
+    Double ratio;
+    po(int value,int weight)
+    {
+        this.value=value;
+        this.weight=weight;
+        ratio=((double)value)/((double)weight);
+    }
+    
+}

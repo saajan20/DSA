@@ -1,0 +1,111 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+void swap(char *x, char *y)  
+{  
+    char temp;  
+    temp = *x;  
+    *x = *y;  
+    *y = temp;  
+}  
+void f(char *a,int l,int r){
+   if(l==r)
+   {
+   cout<<a<<" ";
+   return;
+   }
+   for(int i=l;i<=r;i++)
+   {
+       swap((a+l),(a+i));
+       f(a,l+1,r);
+       swap((a+l),(a+i));
+   }
+}
+int main()
+ {
+	//code
+	ll t,i;
+	cin>>t;
+	while(t--)
+	{   set<char> se;
+	    char s[100];
+	    string a="";
+	    cin>>s;
+
+	     int l=strlen(s);
+	     for(i=0;i<l;i++)
+	     se.insert(s[i]);
+	     
+	     set <char> :: iterator it;
+	     for(it=se.begin();it!=se.end();it++)
+	     a+=*it;
+	  
+	   // cout<<a<<endl;
+	    sort(a.begin(),a.end());
+	    a.copy(s,l,0);
+	    f(s,0,l-1);
+	    cout<<endl;
+	}
+	return 0;
+}
+
+
+--------------------------------------------------------------------------------
+
+void f(string a){
+    do{
+        cout<<a<<" ";
+    }while(next_permutation(a.begin(),a.end()));
+  
+}
+---------------------------------------------------------------------------------
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void swap(char *x, char *y)  
+{  
+    char temp;  
+    temp = *x;  
+    *x = *y;  
+    *y = temp;  
+}  
+
+void permutatio (string a, int l, int r, int n,vector<string> &ans){
+    if (l==r){
+        // cout<<a<<" ";
+        ans.push_back(a);
+        return;
+    }         
+    else
+    {  
+        for (int i = l; i <= r; i++)  
+        {  
+            swap(a[l], a[i]);  
+           // cout<<"("<<a<<")";
+            permutatio(a, l+1, r, n, ans);  
+            swap(a[l], a[i]);   
+        }  
+    }  
+}
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    string s;
+	    cin>>s;
+	    vector<string> ans;
+	    //sort(s.begin(), s.end());
+	    //cout<<ans.size();
+	    permutatio(s,0,s.size()-1, s.size(), ans);
+	    //cout<<ans.size();
+	    sort(ans.begin(), ans.end());
+	    for(int i=0;i<ans.size();i++){
+	        cout<<ans[i]<<" ";
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}

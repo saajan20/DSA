@@ -1,0 +1,105 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+struct co{
+    int x,y;
+};
+	co start,destination;
+
+	
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+
+	while(t--)
+	{ 
+	    int i,j,n;
+	    cin>>n;
+	    int  m[n+1][n+1];
+	    bool vis[n+1][n+1];
+	    for(i=1;i<=n;i++)
+	    {
+	      for(j=1;j<=n;j++)
+	      {
+	        cin>>m[i][j];
+	        if(m[i][j]==0)
+	        vis[i][j]=true;
+	        else
+	        vis[i][j]=false;
+	        if(m[i][j]==1)
+	        {
+	            start.x=i;
+	            start.y=j;
+	        }
+	        else if(m[i][j]==2)
+	        {
+	            destination.x=i;
+	            destination.y=j;
+	        }
+	     }
+    }
+	   
+ queue <co> q;
+ q.push(start);
+ co temp,p;
+ vis[start.x][start.y]=true;
+ while(!q.empty())
+ {
+    temp=q.front();
+    q.pop();
+     vis[temp.x][temp.y]=true;
+    int ax,ay;
+    //x+1,y
+    ax=temp.x+1;ay=temp.y;
+    if(ax<=n)
+    {
+        if(!vis[ax][ay]&&m[ax][ay])
+        {
+            p.x=ax;
+            p.y=ay;
+            q.push(p);
+        }
+    }
+    //x,y-1
+     ax=temp.x;ay=temp.y-1;
+     if(ay>=1)
+    {
+        if(!vis[ax][ay]&&m[ax][ay])
+        {
+            p.x=ax;
+            p.y=ay;
+            q.push(p);
+        }
+    }
+    //x,y+1
+     ax=temp.x;ay=temp.y+1;
+     if(ay<=n)
+    {
+        if(!vis[ax][ay]&&m[ax][ay])
+        {
+            p.x=ax;
+            p.y=ay;
+            q.push(p);
+        }
+    }
+    
+   //x-1,y
+     ax=temp.x-1;ay=temp.y;
+     if(ax>=1)
+    {
+        if(!vis[ax][ay]&&m[ax][ay])
+        {
+            p.x=ax;
+            p.y=ay;
+            q.push(p);
+        }
+    }  
+ }
+ 
+ cout<<vis[destination.x][destination.y]<<endl;
+	    
+	}
+	return 0;
+}

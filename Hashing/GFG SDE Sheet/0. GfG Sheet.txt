@@ -1,0 +1,3 @@
+First element to occur k times: basic map question
+Number of pairs: basic map, sorting, binarysearch
+Find all pairs with given sum: set/(binary search & sorting)

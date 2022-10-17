@@ -1,0 +1,78 @@
+package f;
+
+import java.util.*;
+
+public class ma{
+	
+	public static void main(String args[]) {
+		int n,i;
+		int id;
+		String name;
+		String address;
+		Scanner sc=new Scanner(System.in);
+		n=sc.nextInt();
+		student s[]=new student[n];
+		for(i=0;i<n;i++)
+		{
+			id=sc.nextInt();
+			name=sc.next();
+			address=sc.next();
+			s[i]=new student(id,name,address);
+		}
+		
+		Arrays.sort(s,new sortby());
+		for(student h:s)
+		{
+			System.out.println(h.getId()+" "+h.getName()+" "+h.getAddress());
+		}
+	}
+}
+class sortby implements Comparator<student>{
+	public int compare(student a,student b) {
+		return a.getId()-b.getId();
+	}
+}
+---------------------------------------------------------------------------
+  
+		     Arrays.sort(arr, new Comparator<po>()  
+        { 
+            @Override
+            public int compare(po o1, po o2)  
+            { 
+                return o2.ratio.compareTo(o1.ratio); 
+            } 
+        });
+
+-----------------------------------------------------------------------------
+
+class student {
+	int id;
+	String name;
+	String address;
+	
+	public student(int id, String name, String address) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+}
+	

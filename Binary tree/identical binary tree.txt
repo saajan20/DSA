@@ -1,0 +1,14 @@
+int Solution::isSameTree(TreeNode* r1, TreeNode* r2) {
+      if(r1==NULL && r2==NULL)
+    return true;
+    if((r1==NULL && r2!=NULL) || (r2==NULL && r1!=NULL))
+    return false;
+    if(r1->val== r2->val)
+    {
+        bool a=isSameTree(r1->left,r2->left);
+        bool b=isSameTree(r1->right,r2->right);
+        return (a&b);
+    }
+    else
+    return false;
+}

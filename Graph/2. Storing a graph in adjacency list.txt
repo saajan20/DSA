@@ -1,0 +1,71 @@
+	// your code goes here
+ll t;
+cin>>t;
+while(t--)
+{   
+    int nodes;//noOfNodes
+    cin>>nodes;
+    
+    vector<int> graph[nodes];//an array of vectors
+    int i,edges,node1,node2;
+    cin>>edges;
+    
+    rep(i,edges){//undirected
+        cin>>node1>>node2;
+        graph[node1].pb(node2);
+        graph[node2].pb(node1);
+    }
+    //printing
+    for(i=0;i<nodes;i++){
+        for(int j:graph[i])
+        cout<<i<<"-->"<<j<<endl;
+    }
+}
+
+Case 2: when graph node is complex
+
+//complex node
+class Node{
+    public:
+    string name;//cityName
+    vector<string> neighbours;
+    int noOfRoutes;
+    
+    Node(string name){
+        this->name = name;
+    }
+};
+
+ll t;
+cin>>t;
+while(t--)
+{   
+    int nodes;//noOfNodes
+    cin>>nodes;
+    unordered_map<string, Node*> graph;
+    int i,noOfRoutes,j;
+    string city;
+    for(i=0;i<nodes;i++){
+      
+        cin>>city;
+        graph[city] = new Node(city);//new returns address in c++ therefore we have Node* in map
+        cin>>noOfRoutes;
+        graph[city]->noOfRoutes=noOfRoutes;
+        
+        vector<string> neighbours;
+        string neighbour;
+        for(j=0;j<noOfRoutes;j++){
+            cin>>neighbour;
+            neighbours.push_back(neighbour);
+        }
+        graph[city]->neighbours=neighbours;
+        neighbours.clear();
+    }
+    for(auto node:graph){
+          cout<<node.first<<" ";
+          Node* currentNode = node.second;
+          for(string neighbour:currentNode->neighbours)
+          cout<<currentNode->name<<"-->"<<neighbour<<" ";
+          cout<<endl;
+    }
+}

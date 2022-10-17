@@ -1,0 +1,41 @@
+Eg Grpah: 0<->1,0<->2,0<->3,1<->2,2<->3,3<->4
+
+int V;
+vector<pair<int,int>> adj[V];
+int dfs(int src,int dest){
+    
+    vector<int> distance(V,INT_MAX);
+    distance[src] = 0;
+    
+    set<pair<int,int>> edges; //edges to be traversed
+    
+    //starting point, 0 distance for reaching src
+    edges.insert({0,src}); // weight first so that it can sort by weight
+    
+    while(!edges.empty()){
+        auto best = edges.begin();
+        int node = best->second;
+        int distanceTillNow = best->first;
+        s.erase(best);
+        
+        for(auto neighbours : adj[node]){
+            int neighbour = neighbours.first;
+            int newEdgeDistance = neighbours.second;//distance from node to neighbour
+            
+            if(distanceTillNow+newEdgeDistance<distance[neighbour]){
+                
+                auto existing = s.find({distance[neighbour],neighbour});
+                
+                if(existing != s.end()){ //check to find if we have found new better route to a visited node
+                    s.erase(existing);
+                }
+                
+                distance[neighbour] = distanceTillNow + newEdgeDistance;
+                s.insert({distance[neighbour],neighbour});
+            }
+            
+        }
+    }
+ return distance[dest];
+    
+}

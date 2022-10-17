@@ -1,0 +1,5 @@
+01 KnapSack: DP, Recursion, covers every topic around DP
+Subset Sum Problem: DP, Recursion, variant of 01 knapsack
+Rod Cutting: DP, Recursion, Unbounded
+Coin Change: DP, Recursion, Unbounded
+Minimum No of coins: DP, Recursion, Unbounded

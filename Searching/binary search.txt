@@ -1,0 +1,47 @@
+int bin_search(int a[], int lef, int righ, int k)
+{   
+   while(lef<=righ)
+   {
+       int mid=lef+(righ-lef)/2;
+       
+       if(a[mid]==k)
+       return mid;
+       
+       else if(a[mid]>k)
+       righ=mid-1;
+       
+       else
+       lef=mid+1;
+   }
+    return -1;
+}
+
+binary search STL function C++: https://www.geeksforgeeks.org/binary-search-functions-in-c-stl-binary_search-lower_bound-and-upper_bound/
+
+Java library: https://www.geeksforgeeks.org/arrays-binarysearch-java-examples-set-1/
+
+//returns first element greater than or equal to target
+int lower_bound(vector<int> nums, int target){
+        int l = 0, r = nums.size()-1, m = 0;
+        while(l < r) {
+            m = (l+r)/2;
+            if(nums[m] < target)
+                l = m+1;
+            else 
+                r = m;
+        }
+        return r;
+    }
+
+//returns first element greater than target
+    int upper_bound(vector<int> nums, int target){
+        int l = 0, r = nums.size()-1, m = 0;
+        while(l < r) {
+            m = (l+r)/2;
+            if(nums[m] <= target)
+                l = m+1;
+            else 
+                r = m;
+        }
+        return r;
+    }

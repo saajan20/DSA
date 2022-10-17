@@ -1,0 +1,32 @@
+int Solution::sumNumbers(TreeNode* A) {
+    queue <TreeNode*> q;
+    queue <int> value;
+    q.push(A);
+    value.push(A->val);
+    int s=0;
+    while(!q.empty())
+    {
+        TreeNode *temp= q.front();
+        q.pop();
+        int f=value.front();
+        value.pop();
+        if(temp->left)
+        {
+            q.push(temp->left);
+            value.push((((temp->left)->val)+f*10)%1003);
+        }
+        
+         if(temp->right)
+        {
+            q.push(temp->right);
+            value.push((((temp->right)->val)+f*10)%1003);
+        }
+        
+        if(temp->left==NULL && temp->right==NULL)
+        s=(s+f)%1003;
+        
+    }
+    
+   
+    return s;
+}

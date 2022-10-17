@@ -1,0 +1,25 @@
+https://www.geeksforgeeks.org/merge-two-sorted-arrays/
+
+
+Sol: 
+
+ void merge(long long arr1[], long long arr2[], int n, int m) 
+        { 
+            // code here 
+            for(int i=0;i<n;i++){ //iterate arr1
+                int j=0;
+                int smallestElementFromSecond = arr2[j]; //smallest element from second array
+                if(smallestElementFromSecond < arr1[i]){ //swap of element if second array is small
+                    arr2[j] = arr1[i];
+                    arr1[i] = smallestElementFromSecond 
+                    while(j<m-1 && arr2[j]>arr2[j+1]){//find correct position of arr1[i] in arr2[]
+                       swap(arr2[j],arr2[j+1]);
+                       j++;
+                    }
+                }
+            }
+            
+        } 
+
+more efficient way to do it O(1) space
+https://www.geeksforgeeks.org/efficiently-merging-two-sorted-arrays-with-o1-extra-space/

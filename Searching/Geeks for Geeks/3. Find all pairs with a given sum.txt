@@ -1,0 +1,42 @@
+Problem: https://www.geeksforgeeks.org/given-two-unsorted-arrays-find-pairs-whose-sum-x/
+
+Solution:
+Using sort and binary search
+
+vector<pair<int,int>> allPairs(int A[], int B[], int N, int M, int X)
+    {
+        // Your code goes here   
+        vector<pair<int,int>> pairSum;
+        int i;
+        
+        sort(B,B+M); //to use binary search
+        for(i=0;i<N;i++){
+            int numberToBeSearchedInArrayB = X-A[i];
+            if(binary_search(B,B+M,numberToBeSearchedInArrayB))
+             pairSum.push_back(make_pair(A[i],numberToBeSearchedInArrayB));
+        }
+    sort(pairSum.begin(), pairSum.end());//output requirement
+    return pairSum;
+    }
+
+Using hashing
+
+ vector<pair<int,int>> allPairs(int A[], int B[], int N, int M, int X)
+    {
+        // Your code goes here   
+        vector<pair<int,int>> pairSum;
+        int i;
+        unordered_set<int> setForArrayB;
+        
+        for(i=0;i<M;i++)
+         setForArrayB.insert(B[i]);
+        
+       
+        for(i=0;i<N;i++){
+            int numberToBeSearchedInArrayB = X-A[i];
+            if(setForArrayB.find(numberToBeSearchedInArrayB) != setForArrayB.end()) //element is present
+             pairSum.push_back(make_pair(A[i],numberToBeSearchedInArrayB));
+        }
+    sort(pairSum.begin(), pairSum.end());//output requirement
+    return pairSum;
+    }

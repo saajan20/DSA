@@ -1,0 +1,66 @@
+Problem: https://www.geeksforgeeks.org/find-number-pairs-xy-yx/
+
+Solution:
+
+x^y > y^x is true most of the times when y>x except few edge cases (maths)
+
+Exceptions
+
+x=0 -> No pairs as 0 < 1
+x=1 -> x^y will be greater only when y=0
+if x > 0,1 -> add the cases where y=0,1
+x=2 No pairs when y = 3&4
+x=3 add the case when y=2
+
+for keeping a count of elements we can use (map).
+
+sort the y array, find the smallest greatest element and get the count of all the element greater than x (use upper_bound binary search)
+
+ // X[], Y[]: input array
+    // M, N: size of arrays X[] and Y[] respectively
+    //Function to count number of pairs such that x^y is greater than y^x.
+    long long countPairs(int X[], int Y[], int M, int N)
+    {
+       //Your code here
+       int countOfYElement[5] = {0};
+       int i;
+       for(i=0;i<N;i++){
+           if(Y[i]<5)
+            countOfYElement[Y[i]]++;
+       }
+       
+       long long count = 0;
+       sort(Y,Y+N);
+       for(i=0;i<M;i++){
+           count+=countPairForX(X[i],Y,N,countOfYElement);
+       }
+       return count;
+    }
+    
+    long long countPairForX(int element, int y[], int n, int countArray[]){
+        
+        long long count = 0;
+        
+        if(element==0)
+        return 0;
+        
+        if(element==1)
+        return countArray[0];
+        
+        count+= countArray[0] + countArray[1];
+        
+        int *itr = upper_bound(y, y+n, element);
+        int elementsGreaterThanX = (y+n)-itr;
+        
+        count+=elementsGreaterThanX;
+        
+        if(element==2)
+        count-=countArray[3]+countArray[4];
+        
+        if(element==3)
+        count+=countArray[2];
+        
+        return count;
+         
+    }
+

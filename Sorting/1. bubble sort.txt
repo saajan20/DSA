@@ -1,0 +1,17 @@
+for(i=0;i<n-1;i++)
+{ int flag=0;
+ 	for(j=0;j<n-1-i;j++) //after each pass the max element will be placed to it's true place in a sorted array, therefore we don't compare already sorted elements at the end
+	{
+		if(a[j]>a[j+1])
+		swap(a[j],a[j+1]);
+		flag=1;
+	}
+	if(flag==0)//already sorted no swaps required
+	break;
+}
+
+idea: to compare and swap elements for (n-1) times so that (n-1) greater elements are sorted
+
+https://www.youtube.com/watch?v=Jdtq5uKz-w4
+
+O(n^2)

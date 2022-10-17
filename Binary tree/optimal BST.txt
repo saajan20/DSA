@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+struct node{
+ int data;
+ node *left,*right;
+ node(int v)
+ {
+     data=v;
+     left=right=NULL;
+ }
+};
+node *insert(node *root,int data)
+{
+     if(root==NULL)
+     return new node(data);
+     if(data<=root->data)
+     root->left=insert(root->left,data);
+     else
+     root->right=insert(root->right,data);
+     
+     return root;
+}
+int sum(int l ,int r,int freq[])
+{
+ int i,v=0;
+ for(int i=l;i<=r;i++)
+  v+=freq[i];
+  return v;
+}
+int f(int freq[],node *root,int n)
+{
+    int gap,i,j,k;
+    int table[n][n];
+    for(i=0;i<n;i++)
+    table[i][i]=freq[i];
+    for(gap=1;gap<n;gap++)
+    {
+        for(i=0,j=gap;j<n;i++,j++)
+        {    table[i][j]=INT_MAX;
+            for(k=i;k<=j;k++)
+            {
+                int x = (k-1>=i)?table[i][k-1]:0;
+                int y=  (k+1<=j)?table[k+1][j]:0;
+                int c=x+y+sum(i,j,freq);
+                
+                table[i][j]=min(table[i][j],c);
+            }
+        }
+    }
+    return table[0][n-1];
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{    int n,val,i;
+	     node *root=NULL;
+	     cin>>n;
+	    int freq[n];
+	     for(i=0;i<n;i++)
+	     {
+	         cin>>val;
+	         root=insert(root,val);
+	     }
+	     
+	     for(i=0;i<n;i++)
+	     cin>>freq[i];
+	    cout<<f(freq,root,n)<<endl;
+	}
+	return 0;
+}

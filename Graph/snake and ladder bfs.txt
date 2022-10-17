@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+int bfs(bool vis[],int move[]){
+  queue <pair<int,int>> q;
+  q.push(make_pair(1,0));
+  vis[1]=true;
+   pair <int,int> temp;
+  while(!q.empty())
+  {
+     
+      temp=q.front();
+      q.pop();
+      
+      if(temp.first==30)
+      break;
+      
+      ll j;
+      
+      for(j=temp.first+1;(j<=(temp.first+6))&&(j<=30);j++)
+      {
+          if(!(vis[j]))
+          {   
+              vis[j]=true;
+              int val,dis;
+              dis=temp.second+1;
+              if(move[j]!=-1)
+              val=move[j];
+              else
+              val=j;
+              q.push(make_pair(val,dis));
+          }
+      }
+      
+  }
+  return temp.second;
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+	    int board[31];
+	    bool vis[31];
+	    memset(vis,false,sizeof(vis));
+	    memset(board,-1,sizeof(board));
+	    int n;
+	    cin>>n;
+	    while(n--)
+	    {
+	        ll a,b;
+	        cin>>a>>b;
+	        board[a]=b;
+	    }
+	    
+	  cout<<bfs(vis,board)<<endl;  
+	   
+	    
+	    
+	    
+	}
+	return 0;
+}

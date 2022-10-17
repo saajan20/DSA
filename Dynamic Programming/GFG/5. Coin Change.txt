@@ -1,0 +1,47 @@
+Problem:https://www.geeksforgeeks.org/coin-change-dp-7/
+Video:https://www.youtube.com/watch?v=I4UR2T6Ro3w&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=15
+
+Solution
+when asked no of ways always sum up all the solution
+Recursive
+
+ long long int noOfWays(int coin[], int size, int sum) {
+        
+        
+        if(sum==0)//if sum is 0 we can always return {}
+        return 1;
+        
+        if(size==0)//if we don't have any coin we can't make any sum>0
+        return 0;
+        
+        if(coin[size-1]<=sum){
+            return count(coin,size,sum-coin[size-1])+count(coin,size-1,sum);
+        }
+        else
+        return count(coin,size-1,sum);
+    }
+
+bottom up
+
+long long int noOfWays(int coin[], int size, int sum) {
+     
+         long long t[size+1][sum+1];
+         int i,j;
+         
+         for(j=0;j<=sum;j++)
+         t[0][j]=0;
+         
+         for(i=0;i<=size;i++)
+         t[i][0]=1;
+         
+          for(i=1;i<=size;i++){
+            for(j=1;j<=sum;j++){
+                if(coin[i-1]<=j){
+                    t[i][j] = t[i][j-coin[i-1]] + t[i-1][j];
+                }
+                else
+                t[i][j]=t[i-1][j];
+            }
+        }
+       return t[size][sum];  
+     }

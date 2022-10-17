@@ -1,0 +1,39 @@
+https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
+As it is undirected we don't need to keep track on current iteration as we will never re-visit node from diff iteration
+For eg: 0<->1,1<->2,2<->0,2<->3,3<->4
+
+bool vis[101];
+bool dfs(vector<int> adj[],int curr,int parent)
+{   
+    vis[curr]=true; //mark current node as visited
+    for(auto x:adj[curr])
+    {
+          if(!vis[x]){ //if neighbour isn't visited
+		bool cycleInNeighbour = (adj,x,curr); //check if cycle present in neighbour hood
+		if(cycleInNeighbour)
+		return true;
+		}
+          else if(x!=parent) //cycle present at current node
+		return true;
+    }
+    return false; // no cycle at current node or neighbour
+}
+
+bool isCyclic(vector<int> adj[], int V)
+{ 
+   bool a;
+   memset(vis,false,sizeof(vis));
+   int i;
+   for(i=0;i<V;i++)
+   {
+       if(!vis[i])
+         {
+             a=dfs(adj,i,-1);
+         }
+        if(a)
+         return true;
+   }
+   return false;
+   
+}

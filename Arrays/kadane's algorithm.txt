@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+	    ll n,ans,prev,i;
+	    cin>>n;
+	    int a[n];
+	    for(i=0;i<n;i++)
+	    cin>>a[i];
+	    prev=ans=a[0]; //Initializing the values
+	    int newValue;
+	    for(i=1;i<n;i++)
+	    {
+	        newValue=a[i]+prev; // summing in the new element to the previous best
+	        prev=max(a[i],newValue);   // checking whether it's worth to keep the past elements with our current element.
+	        ans=max(ans,prev); // updating the ans value incase it's greater then previous record.
+	    }
+	    cout<<ans<<endl;
+	}
+	return 0;
+}

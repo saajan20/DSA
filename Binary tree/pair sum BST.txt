@@ -1,0 +1,17 @@
+set <int> s;
+ int f(TreeNode* root, int sum)
+ {
+  if(root==NULL)
+    return 0;
+    int d=sum-root->val;
+    if(s.find(d)!=s.end())
+    return 1;
+    s.insert(root->val);
+    int a=f(root->left,sum);
+    int b=f(root->right,sum);
+    return a|b;
+}
+int Solution::t2Sum(TreeNode* root, int sum) {
+    s.clear();
+    return f(root,sum);
+}

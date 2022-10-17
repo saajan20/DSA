@@ -1,0 +1,70 @@
+//whenever you push you print the value...
+#include<bits/stdc++.h>
+using namespace std;
+void dfs(vector <int> v[],int root)
+{   
+    int visited[9]={0};
+    visited[root]=1;
+    stack<int> s;
+    s.push(root);
+    cout<<root<<" ";
+    while(!s.empty())
+    {
+        int a=s.top();
+        int f=0;
+        for(auto x : v[a])
+        {
+            if(!visited[x])
+            {   cout<<x<<" ";
+                f=1;
+                visited[x]=1;
+                s.push(x);
+                break;
+            }
+        }
+        if(f==0)
+        s.pop();
+      
+    }
+    
+}
+void addedge(vector<int> adj[],int a,int b)
+{
+    adj[a].push_back(b);
+    adj[b].push_back(a);
+}
+int main()
+{
+    vector <int> v[9];
+     addedge(v,0,1);
+     addedge(v,0,2);
+     addedge(v,1,3);
+     addedge(v,1,4);
+     addedge(v,2,4);
+     addedge(v,2,5);
+     addedge(v,3,6);
+     addedge(v,4,6);
+     addedge(v,4,7);
+     addedge(v,5,7);
+     addedge(v,6,8);
+     addedge(v,7,8);
+     dfs(v,0);
+             
+}
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
+void dfs(int s,bool visited[],vector <ll> adj[])
+{
+    visited[s]=true;
+    for(auto x :adj[s])
+    {
+        if(!visited[x])
+        dfs(x,visited,adj);
+    }
+    
+}
+---------------------------------------------------------------------------------------------

@@ -1,0 +1,59 @@
+void postorder(struct node *root)
+{
+    stack <node*> s;
+    vector <int> v;
+    struct node *curr=root;
+    while(curr!=NULL || !s.empty() )
+    {
+        while(curr)
+        {
+           v.push_back(curr->data);
+            curr=curr->right;
+        }
+        curr=s.top();
+        s.pop();
+        curr=curr->left;
+    }
+    reverse(v.begin(),v.end());
+    return v;
+}
+  vector<int> Solution::postorderTraversal(TreeNode* A) {
+    stack <TreeNode*> s;
+    vector <int> v;
+    v.clear();
+    struct TreeNode *curr=A,*temp;
+ while(curr!=NULL || !s.empty())
+  {  
+      
+     if(curr)
+  {  
+      s.push(curr);
+      curr=curr->left;
+  }
+  
+  else
+  {
+  temp=(s.top())->right;
+  if(temp==NULL)
+  {  
+      temp=s.top();
+      v.push_back(temp->val);
+      s.pop();
+       while(!s.empty()&&((s.top())->right==temp))
+       {    
+           temp=s.top();
+           v.push_back((s.top())->val);
+           s.pop();
+       }
+  }
+ 
+  else
+  {
+      curr=temp;
+  }
+  }
+     
+ }
+ 
+ return v;
+}

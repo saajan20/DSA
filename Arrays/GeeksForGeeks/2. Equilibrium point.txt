@@ -1,0 +1,63 @@
+Problem: https://www.geeksforgeeks.org/find-element-array-sum-left-array-equal-sum-right-array/
+
+Solution 1: Observation and looping
+
+// Function to find equilibrium point in the array.
+    // a: input array
+    // n: size of array
+    int equilibriumPoint(long long a[], int n) {
+    
+        // Your code here
+        long left_sum,right_sum;
+        int i;
+        left_sum=right_sum=0;
+        
+        for(i=1;i<n;i++){
+            right_sum+=a[i];
+        }
+        
+        if(left_sum == right_sum){
+            return 1;
+        }
+        
+        for(i=1; i<n-1;i++){
+            left_sum+=a[i-1];
+            right_sum-=a[i];
+             if(left_sum == right_sum){
+                return i+1;   //1-based indexing
+            }
+            
+        }
+        
+        return -1;
+        
+    }
+
+
+Solution 2: Two pointers (need to refactor a bit)
+
+int equilibriumPoint(long long a[], int n) {
+    
+        // Your code here
+        int i,j,leftSum,rightSum;
+        leftSum=rightSum=0;
+    
+        for(i=0,j=n-1;i<j;i++,j--){
+            leftSum+=a[i];
+            rightSum+=a[j];
+            while(leftSum<rightSum && i<j)
+            {    
+                i++;
+                leftSum+=a[i];
+            }
+            while(rightSum<leftSum && i<j)
+            {    
+                j--;
+                rightSum+=a[j];
+            }
+           
+        }
+ 	 if(i==j && rightSum == leftSum)
+         return a[i];
+         return -1;
+    }

@@ -1,0 +1,112 @@
+Problem: https://www.geeksforgeeks.org/rotate-matrix-elements/
+
+Solution:
+1. iterating the dead-end way
+
+ vector<vector<int>> rotateMatrix(int m, int n, vector<vector<int>> a) {
+        // code here
+        int curr,prev;
+        int x,y;
+        int xnew,ynew;
+        
+        int di=0;
+        int dr[4] = {0,1,0,-1};
+        int dc[4] = {1,0,-1,0};
+        
+        x=y=xnew=ynew=0;
+        
+        if(m==1 || n==1)
+        return a;
+        
+        int visited[m][n];
+        memset(visited, 0, sizeof(visited));
+        
+        for(int i=0; i<m*n; i++){
+            
+            visited[x][y]=1;
+            
+            if(x==y && di==0){ //start of the ring, di=0 means left->right
+                     
+                 if(visited[x+1][y] == 0 && visited[x][y+1] == 0){//check if ring is possible
+                 prev = a[x][y];
+                 a[x][y] = a[x+1][y];
+                 }
+                 else //middle row or column or both
+                    break;
+                }
+                
+            else{ //rotate
+                curr = a[x][y];
+                a[x][y] = prev;
+                prev = curr;
+            }
+            //prepare the next pair
+            xnew = x + dr[di];
+            ynew = y + dc[di];
+            
+            if(xnew >= 0 && xnew<m && ynew>=0 && ynew<n && !visited[xnew][ynew]){//check if it's valid pair
+                x = xnew;
+                y = ynew;
+             }
+            else{ //change the direction, move right
+                 di = (di+1)%4;
+                 x = x + dr[di];
+                 y = y + dc[di];
+            }
+        }
+        return a;
+    }
+
+
+2. Removing row and column once traversed
+
+ vector<vector<int>> rotateMatrix(int endRow, int endColumn, vector<vector<int>> a) {
+        // code here
+        int startRow, startColumn, i, curr,prev;
+        startRow=startColumn=0;
+        
+        while(startRow<endRow && startColumn<endColumn){
+            
+            //when single row or column or when middle row or column or both
+            if(startRow+1==endRow||startColumn+1==endColumn)
+            break;
+
+            //start of the ring
+            prev = a[startRow+1][startColumn];
+            for(i = startColumn; i<endColumn; i++){
+                curr = a[startRow][i];
+                a[startRow][i] = prev;
+                prev = curr;
+            }
+            startRow++;
+            
+            //top to bottom
+             for(i = startRow; i<endRow; i++){
+                curr = a[i][endColumn-1];
+                a[i][endColumn-1] = prev;
+                prev = curr;
+            }
+            endColumn--;
+            
+            //from right to left
+            if(startRow<endRow){
+             for(i = endColumn-1; i>=startColumn; i--){
+                curr = a[endRow-1][i];
+                a[endRow-1][i] = prev;
+                prev = curr;
+             }
+            }
+             endRow--;
+            
+            //from bottom to top
+            if(startColumn<endColumn){
+             for(i = endRow-1; i>=startRow; i--){
+                curr = a[i][startColumn];
+                a[i][startColumn] = prev;
+                prev = curr;
+             }
+            }
+            startColumn++;
+        }
+        return a;
+    }

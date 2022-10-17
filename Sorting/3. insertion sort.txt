@@ -1,0 +1,17 @@
+ for(i=1;i<n;i++)// unsorted part
+      {   
+          in=i; //current element
+          j=i-1;//greatest element of the sorted part
+	
+		while(j>=0 && a[j] >a[in]){ 	//traversing the sorted slot from the back
+		swap(a[j--],a[in--]); 		//if the element in the sorted part is greater than the current element swap it.
+		}		
+      }
+
+idea: To have two slots one sorted and other un sorted,
+we loop over the unsorted part and place each element one by one to the sorted part.
+
+
+https://www.youtube.com/watch?v=i-SKeOcBwko
+
+better than selection and bubble

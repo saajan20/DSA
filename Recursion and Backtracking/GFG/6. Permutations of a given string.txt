@@ -1,0 +1,72 @@
+Problem: https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+Video: https://www.youtube.com/watch?v=4-Makzrj5qM
+
+	vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    vector<string> all_permutation;
+		    find_allPermutation(S, all_permutation,S.length(),"");
+		    sort(all_permutation.begin(), all_permutation.end());//output requirement
+		    //permute(S,all_permutation);
+		    return all_permutation;
+		}
+		
+		void find_allPermutation(string s,vector<string> &all_permutation,int size, string permute){
+		    if(size==permute.length())
+		        all_permutation.push_back(permute);
+		    
+		    for(int i=0;i<s.length();i++){//selection for the first element
+		        string leftString = s.substr(0,i);
+		        string rightString = s.substr(i+1);
+		        string newS = leftString + rightString; //new string without seleted element
+		        find_allPermutation(newS,all_permutation,size,permute+s[i]);// permuting over remaining string
+		    }
+		}
+		
+//remove duplicates	
+void permute(string str, vector<string> &all_permutation)
+{
+    sort(str.begin(), str.end());
+    do {
+      all_permutation.push_back(str);
+    } while (next_permutation(str.begin(), str.end()));//uses stl funtion;
+}
+
+//Another in-place swapping approach
+Logic: choose a option and permute for other (n-1) options for (n-1) places
+// Function to print permutations of string 
+// This function takes three parameters: 
+// 1. String 
+// 2. Starting index of the string 
+// 3. Ending index of the string. 
+void permute(string a, int l, int r) 
+{ 
+    // Base case 
+    if (l == r) 
+        cout<<a<<endl; 
+    else
+    { 
+        // Permutations made 
+        for (int i = l; i <= r; i++) 
+        { 
+  
+            // Swapping done 
+            swap(a[l], a[i]); 
+  
+            // Recursion called 
+            permute(a, l+1, r); 
+  
+            //backtrack 
+            swap(a[l], a[i]); 
+        } 
+    } 
+} 
+  
+// Driver Code 
+int main() 
+{ 
+    string str = "ABC"; 
+    int n = str.size(); 
+    permute(str, 0, n-1); 
+    return 0; 
+} 

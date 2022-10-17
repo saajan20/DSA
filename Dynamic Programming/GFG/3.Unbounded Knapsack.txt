@@ -1,0 +1,16 @@
+It's a variation of 01 knapsack.
+In Unbounded there's no limitation on how many times a item can be picked
+
+In terms of code,
+we use the n-1 element until solution is possible and we move on only if we don't need it.
+
+https://www.youtube.com/watch?v=aycn9KO8_Ls&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=13
+
+Algo:
+
+       if(wt[n-1]<=W){//check if we can pick the last item
+           return  max(val[n-1]+knapSack(W-wt[n-1],wt,val,n),knapSack(W,wt,val,n-1));//try out both the option
+		//notice we didn't decrement n to n-1, we will continue picking it up until it's an option
+       }
+       else
+        return knapSack(W,wt,val,n-1);//move to next if can't pick the this item

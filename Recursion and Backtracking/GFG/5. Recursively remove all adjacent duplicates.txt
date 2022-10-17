@@ -1,0 +1,65 @@
+Problem: https://www.geeksforgeeks.org/recursively-remove-adjacent-duplicates-given-string/
+Video: https://www.youtube.com/watch?v=dzNOBjv9tDs
+
+Solution
+Approach 1: call remove duplicates function until all the duplicates have been removed
+
+ string rremove(string s){
+        // code here
+        string scopy;
+        while(s!=scopy){
+            scopy = s;
+            s = removeDuplicates(s);
+        }
+        return scopy;
+    }
+    
+    string removeDuplicates(string s){
+    
+    string withoutDuplicates;
+    int i=0;
+    
+    while(i<s.length()){
+         if(s[i+1] && s[i]==s[i+1]){
+	        while(s[i]==s[i+1]){
+	          i++;
+	        }
+	    }
+	    else{
+	        withoutDuplicates+=s[i];
+	    }
+	    i++;
+    }
+    return withoutDuplicates;
+ }
+
+Approach 2: Doing the same but recursively
+
+string rremove(string s){
+        // code here
+       return removeDuplicates(s,"");
+    }
+    
+    string removeDuplicates(string s, string scopy){
+    
+    if(s==scopy)
+    return s;
+    
+    scopy = s;
+    
+    string withoutDuplicates;
+    int i=0;
+    
+    while(i<s.length()){
+         if(s[i+1] && s[i]==s[i+1]){
+	        while(s[i]==s[i+1]){
+	          i++;
+	        }
+	    }
+	    else{
+	        withoutDuplicates+=s[i];
+	    }
+	    i++;
+    }
+    return removeDuplicates(withoutDuplicates, scopy);
+ }

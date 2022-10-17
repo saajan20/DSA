@@ -1,0 +1,40 @@
+idea: to pick a pivot and place element less than that to the left and greater to the right. Then perform the same on both the sides
+
+int partition(int a[],int start,int end)
+{
+     int pivot=a[end],i;
+     int p_index=start;
+     for(i=start;i<end;i++)
+     {
+         if(a[i]<=pivot)
+         {
+             swap(a[i],a[p_index]);
+             p_index++;
+         }
+         
+     }
+     swap(a[p_index],a[end]);
+     return p_index;
+}
+
+void quicksort(int a[],int start,int end)
+{   if(start<end)
+   {
+    int p_index=partition(a,start,end);
+    quicksort(a,start,p_index-1);
+    quicksort(a.p_index+1,end);
+   }
+}
+https://www.youtube.com/watch?v=COk73cpQbFQ&list=PL2_aWCzGMAwKedT2KfDMB9YA5DgASZb3U&index=9
+
+inplace: not using extra space
+stable: maintaing the order of the elements (this one is unstable)
+
+
+randomization for improving the run time
+https://www.geeksforgeeks.org/quicksort-using-random-pivoting/
+
+hoares and lomuto partition scheme
+https://www.geeksforgeeks.org/hoares-vs-lomuto-partition-scheme-quicksort/
+
+

@@ -1,0 +1,47 @@
+void f(TreeNode *root,int k)
+ {
+     if(root==NULL)
+     return;
+     f(root->left,k);
+     if(c==k)
+     return;
+     c++;
+     va=root->val;
+     if(c==k)
+     return;
+     
+     return f(root->right,k);
+ }
+int Solution::kthsmallest(TreeNode* A, int B) {
+    f(A,B);
+    c=0;
+    return va;
+}
+
+
+----------------------------------------------------------------------
+
+
+
+int c,val;
+
+void f(Node *root,int k)
+{
+    if(root==NULL)
+    return;
+    f(root->right,k);
+    if(k==c)
+    return;
+    c++;
+    val=root->key;
+    if(c==k)
+    return;
+    
+    return f(root->left,k);
+}
+void kthLargest(Node *root, int k)
+{
+    c=0;
+    f(root,k);
+    cout<<val<<endl;
+}

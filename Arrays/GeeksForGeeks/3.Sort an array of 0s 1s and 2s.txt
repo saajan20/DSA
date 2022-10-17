@@ -1,0 +1,24 @@
+Problem: https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/
+
+Solution:
+
+DNF( Dutch National Flag) Algorithm https://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
+
+void sort012(int a[], int n)
+    {
+        // coode here 
+        int low = 0;
+        int mid = 0;
+        int high = n-1;
+        
+        while(mid<=high){
+            if(a[mid]==0){
+                swap(a[mid++],a[low++]);
+            }
+            else if(a[mid]==1)
+                mid++;
+            else{
+                swap(a[mid],a[high--]);
+            }
+        }
+    }

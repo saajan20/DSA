@@ -1,0 +1,48 @@
+Problem: https://www.geeksforgeeks.org/find-number-of-islands/
+
+
+Solution
+
+ bool isValid(int x,int y, int row,int col){
+      return ((x<row)&&(y<col)&&(x>=0)&&(y>=0));
+  }
+  
+  void dfs(int x,int y, int row,int col, bool visited[][500],vector<vector<char>> grid){
+      
+      visited[x][y] = true;
+      int dx[] = {-1,-1,-1,0,0,1,1,1};
+      int dy[] = {-1,0,1,-1,1,-1,0,1};
+      
+      for(int i=0;i<8;i++){
+          int newRow, newCol;
+          newRow = x+dx[i];
+          newCol = y+dy[i];
+          if(isValid(newRow, newCol,row,col)){
+              if(!visited[newRow][newCol] && grid[newRow][newCol]=='1'){
+              dfs(newRow, newCol,row,col,visited,grid);
+              }
+          }
+      }
+  }
+    // Function to find the number of islands.
+    int numIslands(vector<vector<char>>& grid) {
+        // Code here
+        int row = grid.size();
+        int col = grid[0].size();
+        
+        bool visited[row][500];
+        memset(visited,false,sizeof(visited));
+        
+        int i,j;
+        int countOfNoOfIsland=0;
+        
+        for(i=0;i<row;i++){
+            for(j=0;j<col;j++){
+                if(!visited[i][j] && grid[i][j]=='1'){
+                    dfs(i,j,row,col,visited,grid);
+                    countOfNoOfIsland++;
+                }
+            }
+        }
+        return countOfNoOfIsland;
+    }

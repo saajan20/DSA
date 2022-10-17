@@ -1,0 +1,4 @@
+Spirally traversing a matrix: loop, 2D array, iteration, initialize 2d array
+Rotate a matrix : loop, 2D array, iteration, initialize 2d array
+Search in a row and column wise sorted matrix : 2d array, iteration (try to do it in logn)
+Print all palindromic paths from top left to bottom right in a matrix: Recursion, 2d Array

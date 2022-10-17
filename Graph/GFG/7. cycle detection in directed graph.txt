@@ -1,0 +1,39 @@
+https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+
+For directed graph we keep a track on currentIteration happening because we may visit a node which was previously visited
+For eg: 0->1,1->2,2->3,0->4,0->5,5->4
+
+bool vis[101], currentIteration[101];
+bool dfs(int in,vector<int> adj[])
+{
+    vis[in]=true;
+    currentIteration[in]=true;
+    for(auto x: adj[in])
+    {
+         if(vis[x] && currentIteration[x])
+         return true;
+         if(!vis[x])
+         {
+             if(dfs(x,adj)) //find cycle in neighbourhood
+             return true;
+         }
+    }
+    currentIteration[in]=false;
+    return false;
+}
+bool isCyclic(int V, vector<int> adj[])
+{
+    // Your code here
+    memset(vis,false,sizeof(vis));
+    memset(currentIteration,false,sizeof(currentIteration));
+    int i;
+    bool a;
+    for(i=0;i<V;i++)//going through all the nodes incase of unconnected graphs
+    {
+         if(!vis[i])
+         a=dfs(i,adj);
+         if(a)
+         return a;
+    }
+    return false;  
+}

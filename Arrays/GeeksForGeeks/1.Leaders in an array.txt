@@ -1,0 +1,24 @@
+Problem
+
+https://www.geeksforgeeks.org/leaders-in-an-array/
+
+Solution
+
+ //Function to find the leaders in the array.
+    public:
+    vector<int> leaders(int a[], int n){
+        // Code here
+        vector <int> v_leaders;
+        int maxRight;
+        v_leaders.push_back(a[n-1]);
+        maxRight=a[n-1];
+        for( int index = n-2;index>=0;index--) {
+            if(a[index]>=maxRight){ //compare with just max right element rather than all the elements
+                maxRight=a[index];
+                v_leaders.push_back(a[index]);
+            }
+        }
+        
+         reverse(v_leaders.begin(), v_leaders.end());//output requirement
+         return v_leaders;
+    }

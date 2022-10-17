@@ -1,0 +1,79 @@
+class DSU{
+  
+  int *parent;
+  int *rank;
+  
+public:  
+  DSU(int n){
+      parent = new int[n];
+      rank = new int[n];
+      for(int i = 0; i<n; i++){
+          parent[i] = -1;
+          rank[i] = 1;
+      }
+  }
+  
+  //find function
+  int find(int i){
+      if(parent[i]==-1)
+      return i;
+      else
+      return parent[i] = find(parent[i]);
+  }
+  
+  //union
+  void unionSet(int x,int y){
+      
+      if(find(x)!=find(y)){
+          if(rank[s1]<rank[s2]){
+              parent[s1] = s2;
+              rank[s2]+=rank[s1];
+          }
+          else{
+              parent[s2] = s1;
+              rank[s1]+=rank[s2];
+          }
+      }
+  }
+  
+};
+
+class Graph{
+    
+int V;
+vector <vector<int>> edgeList;
+ 
+public:
+
+ Graph(int V){
+     this->V = V;
+ }
+ 
+ void addEdge(int x,int y,int w){
+     edgeList.push_back({w,x,y}); //w first coz we will sort by will w
+ }
+ 
+ int kruskalMST(){
+     
+     //sort all edges based on weight
+     sort(edgeList.begin(),edgeList.end());
+     
+     DSU s(v);
+     int cost = 0;
+     
+     for(auto edge:edgeList){
+         int x = edge[0];
+         int y = edge[1];
+         int w = edge[2];
+         
+         if(s.find(x)!=s.find(y)){
+             s.unionSet(x,y);
+             cost+=w;
+         }
+     }
+     return cost;
+ }
+ 
+};
+
+Eg Graph: 0<->1,0<->2,0<->3,1<->2,2<->3,1<->3

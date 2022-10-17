@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+struct node{
+    int data;
+    node *left,*right;
+};
+node* newNode(int key)
+{
+	node* no = new node;
+	no->data = key;
+	no->left = no->right = nullptr;
+ 
+	return no;
+}
+node* insert(node *root,int val)
+{
+    if(root==NULL)
+    return newNode(val);
+    
+    if(val>root->data)
+    root->right=insert(root->right,val);
+    
+    else
+    root->left=insert(root->left,val);
+    
+    return root;
+}
+int c;
+int f(node *root,int k)
+{
+    if(root==NULL)
+    return 0;
+    int res=f(root->left,k);
+    
+    if(k == c)
+    return res;
+    
+    c++;
+    //cout<<root->data<<" ";
+    res+=root->data;
+    
+    if(k==c)
+    return res;
+    
+    return res + f(root->right,k);
+}
+void inorder(node *root)
+{
+    if(root==NULL)
+    return;
+     inorder(root->left);
+     cout<<root->data<<" ";
+     inorder(root->right);
+    
+    
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{   node *root=NULL;
+	    int n,val,k;
+	    int i;
+	    cin>>n;
+	    for(i=0;i<n;i++)
+	    {
+	        cin>>val;
+	        root=insert(root,val);
+	    }
+	  cin>>k;
+	  c=0;
+	 cout<<f(root,k)<<endl;
+	}
+	return 0;
+}

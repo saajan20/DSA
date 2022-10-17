@@ -1,0 +1,53 @@
+
+import java.util.*; 
+public class Set_example 
+{ 
+	public static void main(String[] args) 
+	{ 
+		// Set deonstration using HashSet 
+		Set<String> hash_Set = new HashSet<String>(); 
+		hash_Set.add("Geeks"); 
+		hash_Set.add("For"); 
+		hash_Set.add("Geeks"); 
+		hash_Set.add("Example"); 
+		hash_Set.add("Set"); 
+		System.out.print("Set output without the duplicates"); 
+
+		System.out.println(hash_Set); 
+
+		// Set deonstration using TreeSet 
+		System.out.print("Sorted Set after passing into TreeSet"); 
+		Set<String> tree_Set = new TreeSet<String>(hash_Set); 
+		System.out.println(tree_Set); 
+	} 
+} 
+
+
+
+Set output without the duplicates[Set, Example, Geeks, For]
+Sorted Set after passing into TreeSet[Example, For, Geeks, Set]
+
+
+-----------------------------------------------------------------------------------------
+
+
+// Java program to demonstrate iteration over 
+// HashSet using an iterator 
+import java.util.*; 
+  
+class IterationDemo { 
+    public static void main(String[] args) 
+    { 
+        HashSet<String> h = new HashSet<String>(); 
+  
+        // Adding elements into HashSet usind add() 
+        h.add("Geeks"); 
+        h.add("for"); 
+        h.add("Geeks"); 
+  
+        // Iterating over hash set items 
+        Iterator<String> i = h.iterator(); 
+        while (i.hasNext()) 
+            System.out.println(i.next()); 
+    } 
+} 

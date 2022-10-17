@@ -1,0 +1,14 @@
+for(i=0;i<n-1;i++)
+{   int imin=i;
+   for(j=i+1;j<n;j++)
+   {
+        if(a[imin]>a[j])
+	 imin=j;
+   }
+       swap(a[imin],a[i]);
+}
+
+Find the min element from i+1 to n-1, swap it then with a[i];
+https://www.youtube.com/watch?v=Jdtq5uKz-w4
+
+better than bubble sort as swapping is less

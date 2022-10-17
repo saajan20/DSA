@@ -1,0 +1,3 @@
+https://www.hackerearth.com/practice/data-structures/arrays/multi-dimensional/tutorial/
+
+multiplying array: https://www.mathsisfun.com/algebra/matrix-multiplying.html

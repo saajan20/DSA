@@ -1,0 +1,40 @@
+import java.util.*;
+import java.lang.*;
+class abs{
+     static class Graph
+    {  
+        LinkedList <Integer> adj[];
+        int v;
+        Graph(int v)
+        {
+         this.v=v;
+         adj=new LinkedList[v];
+         for(int i=0;i<v;i++)
+         adj[i]=new LinkedList<>();
+        }
+    }
+    static void addedge(Graph graph,int src,int des)
+    {
+        graph.adj[src].add(des);
+        graph.adj[des].add(src);
+    }
+    static void print(Graph graph)
+    {
+        for(int i = 0; i < graph.v; i++) 
+		{ 
+			System.out.println("Adjacency list of vertex "+ i); 
+			System.out.print("head"); 
+			for(Integer pCrawl: graph.adj[i]){ 
+				System.out.print(" -> "+pCrawl); 
+			} 
+			System.out.println("\n"); 
+		} 
+    }
+    public static void main(String args[])
+    {
+        Graph graph=new Graph(5);
+        addedge(graph,1,2);
+        addedge(graph,0,2);
+        print(graph);
+    }
+}

@@ -1,0 +1,40 @@
+Theory: https://www.scaler.com/topics/data-structures/floyd-warshall-algorithm/
+
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define INF INT_MAX
+ 
+// O(n^2)
+vector<vector<int>> createDistanceMatrix(vector<vector<int>> A, int n) {
+   vector<vector<int>> D(n, vector<int> (n, 0));
+   for (int i = 0; i < n; i++) {
+       for (int j = 0; j < n; j++) {
+           if (i == j)
+               D[i][j] = 0;
+           else if (A[i][j] == 0)
+               D[i][j] = INF;
+           else
+               D[i][j] = A[i][j];
+       }
+   }
+   return D;
+}
+ 
+// O(n^3)
+vector<vector<int>> floydWarshall(vector<vector<int>> A) {
+   int n = A.size();
+   vector<vector<int>> D = createDistanceMatrix(A, n);
+ 
+   for (int k = 0; k < n; k++) {
+       for (int i = 0; i < n; i++) {
+           for (int j = 0; j < n; j++) {
+               if (D[i][k] < INF && D[k][j] < INF)
+                   D[i][j] = min(D[i][j], D[i][k] + D[k][j]);
+           }
+       }
+   }
+ 
+   return D;
+}

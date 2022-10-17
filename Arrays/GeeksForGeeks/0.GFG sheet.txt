@@ -1,0 +1,15 @@
+Leaders in an array: Observation, Greedy
+
+Equilibrium point : observation, two pointer
+
+sort an array of 0s, 1s, abd 2s: DNF( Dutch National Flag) Algorithm https://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
+
+reverse an array in groups of size k (two pointer, reverse)
+
+zig zag array (bubble sort with flag)
+
+find common elements in three sorted arrays (observation,looping)
+
+Union and intersection of two array (observation, looping)(try in java to see how reference works)
+
+Subarrays and Subsequence: Arrays,looping, Recursion,bit manipulation(subsequence)

@@ -1,0 +1,84 @@
+Problem: https://www.geeksforgeeks.org/snake-ladder-problem-2/
+
+DP
+
+int minThrow(int N, int a[]){
+        // code here
+        vector<int> delta(31,0); //tracking start of snacks or ladder
+        for(int i=0; i<2*N; i+=2){
+            delta[a[i]] = a[i+1] -a[i];//difference it will create if we land on either snake or ladder
+        }
+        int memoiz[31]={0}; //dp
+        return minPath(1,delta, memoiz);
+    }
+    int minPath(int currPos, vector<int> delta, int memoiz[]){
+        
+        if(currPos==30)
+        return 0;
+        
+        int minThrow = 1001;
+        
+        if(memoiz[currPos])
+        return memoiz[currPos];
+        
+        for(int i=1;i<=6;i++){
+            int k =currPos + i;
+            if(k<=30){
+                if(delta[k]>=0){ //no point in checking if we're bitten by snake
+                    k+=delta[k];
+                    minThrow = min(minThrow,minPath(k,delta,memoiz));
+                }
+            }
+        }
+        return memoiz[currPos]=1+minThrow;
+    }
+
+-----------------------------------------------------------------------------------
+
+Graph BFS way
+
+int minThrow(int N, int a[]){
+        // code here
+        vector<int> delta(31,0); //tracking start of snacks or ladder
+        for(int i=0; i<2*N; i+=2){
+            delta[a[i]] = a[i+1] -a[i];//difference it will create if we land on either snake or ladder
+        }
+      
+      //creating graph edges with all the possible outcomes from a position to a position
+        vector<int> graph[31];
+        for(int i=1;i<=29;i++){ //from-node
+            for(int j=1;j<=6;j++){
+               int k = i+j; //to-node
+               if(k<=30){
+                   k+=delta[k]; //updating to-node incase of snake or ladder
+                   graph[i].push_back(k);
+               }
+            }
+        }
+        return shortestPathBfs(graph, 1, 30);
+ }
+    
+    int shortestPathBfs(vector <int> v[],int root, int dest)
+{   
+    int visited[31]={0};
+    int distance[31];
+    visited[root]=1;
+    distance[root] =  0; // distance from root to root is 0
+    queue<int> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int a=q.front();
+        q.pop();
+        for(auto x:v[a])
+        {
+            if(!visited[x])
+            {
+                q.push(x);
+                visited[x]=1;
+		distance[x] = distance[a] + 1; //distance till parent + 1
+            }
+        }
+    }
+    return distance[30];
+}

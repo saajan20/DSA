@@ -1,0 +1,5 @@
+Find first repeated character: map, string
+Reverse words in a given string: string, words split
+Check if string is rotated by two places: sub string, mod
+KMP: String matching, lps, DP
+Z algorithm: String matching, DP,Z array

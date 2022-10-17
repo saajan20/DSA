@@ -1,0 +1,59 @@
+int pi;
+Node *f(int pre[], int s, int e,map<int,int>& m)
+{
+ if(s>e)
+ return NULL;
+ 
+ int c=pre[pi++];
+ 
+ Node *t=newNode(c);
+ 
+ if(s==e)
+ return t;
+ 
+ int ini=m[c];
+ 
+ t->left=f(pre,s,ini-1,m);
+ t->right=f(pre,ini+1,e,m);
+ return t;
+}
+Node* buildTree(int in[],int pre[], int inStrt, int inEnd)
+{
+//add code here.
+map<int,int> m;
+pi=0;
+int i;
+for(i=0;i<=inEnd;i++)
+m[in[i]]=i;
+return f(pre,inStrt,inEnd,m);
+}
+---------------------------------------------------------------------------------------------
+
+
+public class Solution {
+    static int pre;
+    static TreeNode f(ArrayList<Integer> A,int s,int e, HashMap<Integer,Integer> map)
+    {
+        if(s>e)
+        return  null ;
+        int d= A.get(pre);
+        pre++;
+        TreeNode t =new TreeNode(d);
+        if(s==e)
+        return t;
+        int ini=map.get(d);
+        t.left=f(A,s,ini-1,map);
+        t.right=f(A,ini+1,e,map);
+        return t;
+        
+    }
+    public TreeNode buildTree(ArrayList<Integer> A, ArrayList<Integer> B) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<B.size();i++)
+        {
+            map.put(B.get(i),i);
+        }
+        pre=0;
+        return f(A,0,A.size()-1,map);
+    }
+}

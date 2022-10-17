@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+void addedge(vector<int> adj[],int a,int b)
+{
+    adj[a].push_back(b);
+    adj[b].push_back(a);
+}
+ 
+void printGraph(vector<int> adj[], int V) 
+{ 
+    for (int v = 0; v < V; ++v) 
+    { 
+        cout << "\n Adjacency list of vertex "
+             << v << "\n head "; 
+        for (auto x : adj[v]) 
+           cout << "-> " << x; 
+        printf("\n"); 
+    } 
+} 
+
+int main(){
+	vector<int> adj[5];
+	addedge(adj,1,2);
+	addedge(adj,0,2);
+	return 0;
+}

@@ -1,0 +1,19 @@
+int n(TreeNode* lef,TreeNode* righ)
+ {
+      if(lef==NULL && righ==NULL)
+    return true;
+    if(lef==NULL || righ==NULL)
+    return false;
+    if(lef->val == righ->val)
+    {
+        bool a=n(lef->left,righ->right);
+        bool b=n(lef->right,righ->left);
+        return (a&b);
+    }
+     return false;
+ }
+int Solution::isSymmetric(TreeNode* A) {
+    if(A==NULL)
+    return 1;
+    return n(A->left,A->right);
+}

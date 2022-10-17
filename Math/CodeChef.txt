@@ -1,0 +1,2 @@
+AVGPERM:permutation, observation,greedy
+KSUB:GCD,greedy

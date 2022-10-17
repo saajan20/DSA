@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int f(string s,int l)
+{   int i;
+    int p[2*l+5]={0};
+    string copy="@";
+    for( i=0;i<l;i++)
+    {
+        copy+="#";
+        copy+=s[i];
+    }
+    copy+="#$";
+   //  cout<<copy<<" ";
+  int c=0,r=0;
+    set <string> o;
+     set <string> :: iterator it;
+    o.clear();
+  for(i=1;i<copy.length()-1;i++)
+  {    
+      
+       int mirror=c-(i-c);
+       
+       if(r>i)
+       p[i]=min(r-i,p[mirror]);
+       
+       while(copy[i+1+p[i]]==copy[i-1-p[i]])
+       {
+          p[i]++;
+          if((copy[i]=='#') && ((p[i]%2)==0))
+          {
+              string h=s.substr((i-p[i]-1)/2,p[i]); 
+            // cout<<p[i]<<" "<<h<<" "<<copy[i]<<"\n";
+            o.insert(h);
+          }
+        else if(p[i]%2 && copy[i]!='#')
+        {
+            string h=s.substr((i-p[i]-1)/2,p[i]); 
+          // cout<<p[i]<<" "<<h<<" "<<copy[i]<<"\n";
+            o.insert(h);
+        }
+        
+     }
+       
+       if(p[i]+i>r)
+       {
+           c=i;
+           r=p[i]+i;
+       }
+       
+    
+  }
+  // for(it=o.begin();it!=o.end();it++)
+ //  cout<<*it<<endl;
+
+  return o.size();  
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{
+	    
+	    string s;
+	    cin>>s;
+	    
+	    int l=s.length();
+	    int ans=f(s,l);
+	    cout<<ans<<endl;
+	    
+	    
+	}
+	return 0;
+}

@@ -1,0 +1,40 @@
+BFS can be used to find shortest path from a node to all other nodes
+For finding the distance to all nodes from root node, we will add 1 to the distance required to travel till its parent node
+
+void shortestPathBfs(vector <int> v[],int root, int dest)
+{   
+    int visited[9]={0};
+    int distance[9];
+    int parent[9];
+    visited[root]=1;
+    distance[root] =  0; // distance from root to root is 0
+    parent[root] = root; // for printing path from dest->root by backtracking parents of each node
+    queue<int> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int a=q.front();
+        cout<<a<<" ";
+        q.pop();
+        for(auto x:v[a])
+        {
+            if(!visited[x])
+            {
+                q.push(x);
+                visited[x]=1;
+		distnace[x] = distance[a] + 1; //distance till parent + 1
+            }
+        }
+    }  
+	
+    for(i=0;i<9;i++){
+ 	cout<<"Shortest distance to " +i+ " is "+distance[i];
+    } 
+
+   int temp = dest;
+   while(temp!=root){
+   cout<<temp;
+   temp = parent[temp];
+   }
+   cout<<root;
+}

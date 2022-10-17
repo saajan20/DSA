@@ -1,0 +1,61 @@
+void v(Node *root,int h,map <int,vector<int>> &m)
+{
+    if(root==NULL)
+    return;
+    m[h].push_back(root->data);
+    v(root->left,h-1,m);
+    v(root->right,h+1,m);
+}
+void verticalOrder(Node *root)
+{
+    //Your code here
+    map <int,vector<int>> m;
+    int h=0,i;
+    v(root,h,m);
+    map <int,vector<int>> :: iterator it;
+    for(it=m.begin();it!=m.end();it++)
+    {
+        for(i=0;i<it->second.size();i++)
+        {
+            cout<<it->second[i]<<" ";
+        }
+    }
+    
+ // cout<<endl;  
+    
+}
+
+-----------------------------------------------------------------------
+
+vector<vector<int> > Solution::verticalOrderTraversal(TreeNode* A) {
+    vector<vector<int> >vect;
+    if(A==NULL)
+    return vect;
+    
+    map<int, vector<int> >hash;
+    queue<pair<TreeNode*,int> >q;
+    q.push(make_pair(A,0));
+    while(!q.empty())
+    {
+        pair<TreeNode*,int>p1 = q.front();
+        q.pop();
+        TreeNode* temp = p1.first;
+        int count = p1.second;
+        hash[count].push_back(temp->val);
+        if(temp->left!=NULL)
+        {
+            q.push(make_pair(temp->left,count-1));
+        }
+        if(temp->right!=NULL)
+        {
+            q.push(make_pair(temp->right,count+1));
+        }
+        free(temp);
+    }
+    map<int,vector<int> >::iterator it;
+    for(it=hash.begin();it!=hash.end();it++)
+    {
+        vect.push_back(it->second);
+    }
+    return vect;
+}

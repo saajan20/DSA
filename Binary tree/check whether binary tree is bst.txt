@@ -1,0 +1,42 @@
+void inorder(Node *root,vector<int> &v)
+{
+      if(root==NULL)
+      return ;
+      inorder(root->left,v);
+      v.push_back(root->data);
+      inorder(root->right,v);
+}
+bool isBST(Node* root) {
+    // Your code here
+    
+    if(root==NULL)
+    return true;
+    vector <int> v;
+    inorder(root,v);
+    int i;
+    for( i=1;i<v.size();i++)
+    {
+        if(v[i-1]>v[i])
+        break;
+    }
+    if(i==v.size())
+    return 1;
+    return 0;
+}
+
+----------------------------------------------------------------------------
+
+bool f(Node*root,int l,int r)
+{
+    if(!root)
+    return true;
+    if(root->data<l || root->data>r )
+    return false;
+    return f(root->left,l,root->data) && f(root->right,root->data+1,r);
+}
+bool isBST(Node* root) {
+    // Your code here
+return f(root,INT_MIN ,INT_MAX);
+
+    
+}

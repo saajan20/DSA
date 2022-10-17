@@ -1,0 +1,151 @@
+bool vis[55][55];
+void dfs(int x,int y,vector<int> a[],int n,int m)
+{
+if((x<0)||(x>=n)||(y<0)||(y>=m))
+return;
+if((vis[x][y])||!(a[x][y]))
+return;
+   vis[x][y]=true;
+   dfs(x+1,y+1,a,n,m);
+   dfs(x,y+1,a,n,m);
+   dfs(x-1,y+1,a,n,m);
+   dfs(x+1,y-1,a,n,m);
+   dfs(x,y-1,a,n,m);
+   dfs(x-1,y-1,a,n,m);
+   dfs(x+1,y,a,n,m);
+   dfs(x-1,y,a,n,m);
+}
+void bfs(int x,int y,vector<int> a[],int n,int m)
+{
+     queue<pair<int,int>> q;
+     q.push(make_pair(x,y));
+     vis[x][y]=true;
+     pair <int,int> temp,p;
+     while(!q.empty())
+     {
+     temp=q.front();
+     q.pop();
+     int ax,ay;
+     ax=temp.first;
+     ay=temp.second;
+     //x+1,y+1
+     if((ax+1)<n&&(ay+1)<m)
+     {
+          if(a[ax+1][ay+1])
+            {
+                if(!vis[ax+1][ay+1])
+                {
+                    q.push(make_pair(ax+1,ay+1));
+                    vis[ax+1][ay+1]=true;
+                }
+            }
+     }
+     //x+1,y-1
+      if((ax+1)<n&&(ay-1)>=0)
+     {
+          if(a[ax+1][ay-1])
+            {
+                if(!vis[ax+1][ay-1])
+                {
+                    q.push(make_pair(ax+1,ay-1));
+                    vis[ax+1][ay-1]=true;
+                }
+            }
+     }
+     //x,y+1
+       if((ay+1)<m)
+     {
+          if(a[ax][ay+1])
+            {
+                if(!vis[ax][ay+1])
+                {
+                    q.push(make_pair(ax,ay+1));
+                    vis[ax][ay+1]=true;
+                }
+            }
+     }
+     //x,y-1
+       if((ay-1)>=0)
+     {
+          if(a[ax][ay-1])
+            {
+                if(!vis[ax][ay-1])
+                {
+                    q.push(make_pair(ax,ay-1));
+                    vis[ax][ay-1]=true;
+                }
+            }
+     }
+     //x-1,y+1
+      if((ax-1)>=0&&(ay+1)<m)
+     {
+          if(a[ax-1][ay+1])
+            {
+                if(!vis[ax-1][ay+1])
+                {
+                    q.push(make_pair(ax-1,ay+1));
+                    vis[ax-1][ay+1]=true;
+                }
+            }
+     }
+     //x-1,y-1
+       if((ax-1)>=0&&(ay-1)>=0)
+     {
+          if(a[ax-1][ay-1])
+            {
+                if(!vis[ax-1][ay-1])
+                {
+                    q.push(make_pair(ax-1,ay-1));
+                    vis[ax-1][ay-1]=true;
+                }
+            }
+     }
+     //x-1,y
+       if((ax-1)>=0)
+     {
+          if(a[ax-1][ay])
+            {
+                if(!vis[ax-1][ay])
+                {
+                    q.push(make_pair(ax-1,ay));
+                    vis[ax-1][ay]=true;
+                }
+            }
+     }
+     //x+1,y
+         if((ax+1)<n)
+     {
+          if(a[ax+1][ay])
+            {
+                if(!vis[ax+1][ay])
+                {
+                    q.push(make_pair(ax+1,ay));
+                    vis[ax+1][ay]=true;
+                }
+            }
+     }
+     
+     }
+}
+int findIslands(vector<int> a[], int n, int m)
+{
+    
+    // Your code here
+    memset(vis,false,sizeof(vis));
+    int c=0,i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<m;j++)
+        {
+            if(a[i][j])
+            {
+                if(!vis[i][j])
+                {
+                    bfs(i,j,a,n,m);
+                    c++;
+                }
+            }
+        }
+    }
+   return c; 
+}

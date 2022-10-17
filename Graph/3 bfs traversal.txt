@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+void bfs(vector <int> v[],int root)
+{   int visited[9]={0};
+     visited[root]=1;
+    queue<int> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int a=q.front();
+        cout<<a<<" ";
+        q.pop();
+        for(auto x:v[a])
+        {
+            if(!visited[x])
+            {
+                q.push(x);
+                visited[x]=1;
+            }
+        }
+    }
+    
+}
+void addedge(vector<int> adj[],int a,int b)
+{
+    adj[a].push_back(b);
+    adj[b].push_back(a);
+}
+int main()
+{
+    vector <int> v[9];
+     addedge(v,0,1);
+      addedge(v,0,2);
+      addedge(v,1,3);
+       addedge(v,1,4);
+         addedge(v,2,4);
+       addedge(v,2,5);
+         addedge(v,3,6);
+            addedge(v,4,6);
+           addedge(v,4,7);
+              addedge(v,5,7);
+               addedge(v,6,8);
+               addedge(v,7,8);
+       bfs(v,5);
+             
+}

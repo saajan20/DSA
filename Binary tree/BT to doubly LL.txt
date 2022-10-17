@@ -1,0 +1,47 @@
+//BT to DLL (inorder)
+void convert(Node *root)
+{
+	if(root==NULL)
+        return;
+	static prev=NULL;
+	convert(root->left);
+	 if(prev==null)
+	{
+		head=root;
+	}
+	else
+	{
+		root->left=prev;
+		prev->right=root;
+	}
+	prev=root;
+	convert(root-right);
+}
+//(level order)
+void convert(Node *root)
+{
+ 	queue<node*> q;
+	q.push(root);
+        while(!q.empty())
+	{
+		Node *curr=q.front();
+		q.pop();
+		q.push(curr->left);
+		q.push(curr->right);
+		if(!prev)
+		{
+			head=root;
+                        head->left=NULL;
+		}
+		else
+             {
+		curr->left=prev;
+		prev->right=curr;
+             }
+
+    prev=curr;
+
+
+	}
+
+}

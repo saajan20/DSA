@@ -1,0 +1,58 @@
+int poi;
+Node *f(int po[],int s,int e,map<int,int>&m)
+{
+    if(s>e)
+    return NULL;
+    int d=po[poi--];
+    Node *t=new Node(d);
+    
+    int ini=m[d];
+    t->right=f(po,ini+1,e,m);
+    t->left=f(po,s,ini-1,m);
+    
+    return t;
+}
+Node *buildTree(int in[], int post[], int n)
+{
+    // Your code here
+    map <int,int> m;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        m[in[i]]=i;
+    }
+     poi=n-1;
+   return f(post,0,n-1,m);  
+}
+
+
+
+------------------------------------------------------------------------------------------
+
+
+public class Solution {
+    static int poi;
+    public static TreeNode f(ArrayList<Integer> post,int s,int e,HashMap<Integer,Integer> map)
+    {  
+        if(s>e)
+        return null;
+        int d=post.get(poi);
+        poi--;
+        TreeNode temp= new TreeNode(d);
+        if(s==e)
+        return temp;
+        int ini=map.get(d);
+        temp.right=f(post,ini+1,e,map);
+        temp.left =f(post,s,ini-1,map);
+        return temp;
+    }
+    public TreeNode buildTree(ArrayList<Integer> in, ArrayList<Integer> post) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<A.size();i++)
+        {
+            map.put(A.get(i),i);
+        }
+        poi=A.size()-1;
+       return f(B,0,A.size()-1,map); 
+    }
+}

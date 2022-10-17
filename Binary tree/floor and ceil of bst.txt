@@ -1,0 +1,30 @@
+void findFloorCeil(Node* root, Node* &floor, Node* &ceil, int key)
+{
+	// base case
+	if(root == nullptr)
+		return;
+
+	// if node with key's value is found, both floor and ceil is equal
+	// to the current node
+	if (root->data == key)
+	{
+		floor = root;
+		ceil = root;
+	}
+
+	// if given key is less than the root node, recur for left subtree
+	else if (key < root->data)
+	{
+		// update ceil to current node before recursing in left subtree
+		ceil = root;
+		findFloorCeil(root->left, floor, ceil, key);
+	}
+
+	// if given key is more than the root node, recur for right subtree
+	else
+	{
+		// update floor to current node before recursing in right subtree
+		floor = root;
+		findFloorCeil(root->right, floor, ceil, key);
+	}
+}

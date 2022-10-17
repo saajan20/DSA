@@ -1,0 +1,121 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+string f(int n,int d)
+{   string res="";
+    int r=n%d;
+    map <int,int> m;
+    while((r!=0) && (m.find(r)==m.end()))
+    {
+       m[r]=res.length();
+       r*=10;
+       int u=r/d;
+       res+=to_string(u);
+       r=r%d;
+      // cout<<r<<" ";
+    }
+    if(r==0)
+    {
+        for(int i=0;i<res.length();i++)
+        {
+            cout<<res[i];
+        }
+        return "";
+    }
+    
+    for(int i=0;i<m[r];i++)
+        {
+            cout<<res[i];
+        }
+    return res.substr(m[r],res.length()-m[r]);
+}
+int main()
+ {
+	//code
+	ll t;
+	cin>>t;
+	while(t--)
+	{  
+	    ll a,b;
+	    cin>>a>>b;
+	    cout<<a/b;
+	    if(a%b)
+	    {
+	      cout<<".";
+	      string s=f(a,b);
+	      if(s.length())
+	      {
+	          cout<<"("<<s<<")";
+	      }
+	    }
+	   
+	    cout<<endl;
+	   
+	}
+	return 0;
+}
+
+
+--------------------------------------------------------------------------------------
+
+
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    static String f(int a,int b)
+    {
+        String res="";
+        HashMap <Integer,Integer> m=new HashMap<>();
+        int r=a%b;
+        while((r!=0) && !(m.containsKey(r)))
+        {
+            m.put(r,res.length());
+             r*=10;
+            int u=r/b;
+       res+=Integer.toString(u);
+       r=r%b;
+        }
+        if(r==0)
+    {
+        for(int i=0;i<res.length();i++)
+        {
+            	System.out.print(res.charAt(i));
+        }
+        return "";
+    }
+    
+    for(int i=0;i<m.get(r);i++)
+        {
+            	System.out.print(res.charAt(i));
+        }
+    return res.substring(m.get(r).intValue(),res.length());
+}
+	public static void main (String[] args) {
+		//code
+		
+		int a,b,t;
+		Scanner sc=new Scanner(System.in);
+		t=sc.nextInt();
+		while(t-->0)
+		{
+		a=sc.nextInt();
+		b=sc.nextInt();
+		
+		System.out.print(a/b);
+		if(a%b!=0)
+		{
+		     System.out.print(".");
+		     String s=f(a,b);
+		     if(s.length()!=0)
+		     System.out.print("("+s+")");
+		}
+		
+		System.out.println("");
+		
+		}
+		
+	}
+}

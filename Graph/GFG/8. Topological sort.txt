@@ -1,0 +1,58 @@
+https://www.geeksforgeeks.org/topological-sorting/
+
+Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge u v, 
+vertex u comes before v in the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG.
+
+Eg Graph: 0->2, 2->3,3->5,1->2,1->4,4->5
+
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    // code here
+	    //BFS Approach
+	    vector<int> topolicalSort;
+	    
+	    //calucate indegree, no of parent/dependent tasks for each node
+	    vector<int> indegree(V,0);
+	    for(int i=0 ;i<V;i++){
+	        for(auto neigh:adj[i]){
+	            indegree[neigh]++;
+	        }
+	    }
+	    
+	    queue<int> q;
+	    for(int i=0;i<V;i++){
+	        if(indegree[i]==0) //nodes with zero dependency
+	        q.push(i);
+	    }
+	    
+	    while(!q.empty()){
+	        int node = q.front();
+	        topolicalSort.push_back(node);
+	        q.pop();
+	        
+	       for(auto neigh:adj[node]){
+	           indegree[neigh]--;  //decrement the dependent task from all the neighbour nodes
+	           if(indegree[neigh]==0){
+	               q.push(neigh);
+	           }
+	       }
+	    }
+	    
+	    return topolicalSort;
+	}
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+void dfsTopological(int node, vector<int> &visited, list<int> &ordering){
+
+visited[node] = true;
+for(int nbr : adj[node]){
+	if(!visited[nbr]){
+	dfs(nbr,visited,ordering); //traversing and adding the childs to the list
+	}
+}
+
+ordering.push_front(node);//adding parent at the front of list
+
+}

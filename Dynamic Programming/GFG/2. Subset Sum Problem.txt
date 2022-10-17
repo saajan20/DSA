@@ -1,0 +1,46 @@
+Problem: https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+Video: https://www.youtube.com/watch?v=_gPcYovP7wc&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=7
+
+Code:
+
+//recursive approach  
+    bool subsetSum(vector<int>arr, int n,int sum){
+    
+    //base cases
+    if(sum==0)
+    return true; //we can always send empty subset
+    
+    if(n==0)
+    return false; //we can't return any subset if we have no elements
+    
+    if(arr[n-1]<=sum){//check if we can consider current element
+        return subsetSum(arr, n-1,sum-arr[n-1])||subsetSum(arr, n-1,sum);//try both the choice
+    }
+    return subsetSum(arr, n-1,sum);//move to next choice
+}
+
+//bottom-up approach
+bool subsetSum(vector<int>arr, int n,int sum){
+    
+    bool a[n+1][sum+1];
+    int i,j;
+    
+    //base cases
+    for(j=0;j<=sum;j++){
+        a[0][j] = false;
+    }
+    
+     for(i=0;i<=n;i++){
+        a[i][0] = true;
+    }
+    
+    for(i=1;i<=n;i++){
+        for(j=1;j<=sum;j++){
+            if(arr[i-1]<=j)
+            a[i][j] = (a[i-1][j-arr[i-1]] || a[i-1][j]);
+            else
+            a[i][j]=a[i-1][j];
+        }
+    }
+  return a[n][sum];  
+}

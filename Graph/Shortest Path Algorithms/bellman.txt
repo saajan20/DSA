@@ -1,0 +1,39 @@
+vector<int> bellman_ford(int V,int src,vector<vector<int>> edges){
+    
+    vector<int> distance(V,INT_MAX);
+    distance[src] = 0;
+    
+    //relaxation part
+    for(int i=1;i<V;i++){ //running v-1 times
+        for(auto edge : edges){ //for every edge
+            int from = edge[0];
+            int to = edge[1];
+            int w = edge[2];
+            
+            if(dist[from]!=INT_MAX && dist[from]+wt<dist[to]){
+                dist[to] = dist[from] + wt;
+            }
+        }
+    }
+    
+    //negative infinite cycle
+    //The above looping guarantees shortest path from a src
+    for(auto edge : edges){ //for every edge
+            int from = edge[0];
+            int to = edge[1];
+            int w = edge[2];
+            
+            if(dist[from]!=INT_MAX && dist[from]+wt<dist[to]){
+                cout<<"infinite cycle"; //if we're getting shorter paths even after running v-1 times means there's a negative cycle
+            }
+        }
+    
+    return distance;
+}
+
+int main(){
+
+
+
+
+}
