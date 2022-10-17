@@ -59,6 +59,7 @@ int main()
 
 void dfs(int s,bool visited[],vector <ll> adj[])
 {
+    cout<<s;
     visited[s]=true;
     for(auto x :adj[s])
     {

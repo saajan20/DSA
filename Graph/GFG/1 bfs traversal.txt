@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 void bfs(vector <int> v[],int root)
-{   int visited[9]={0};
-     visited[root]=1;
+{  
+    int visited[9]={0};
     queue<int> q;
     q.push(root);
+    visited[root]=1;
     while(!q.empty())
     {
         int a=q.front();

@@ -1,4 +1,4 @@
-	// your code goes here
+// your code goes here
 ll t;
 cin>>t;
 while(t--)
