@@ -22,6 +22,7 @@ void shortestPathBfs(vector <int> v[],int root, int dest)
             {
                 q.push(x);
                 visited[x]=1;
+		parent[x] = a;
 		distnace[x] = distance[a] + 1; //distance till parent + 1
             }
         }

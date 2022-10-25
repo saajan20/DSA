@@ -1,6 +1,6 @@
 Problem: https://www.geeksforgeeks.org/snake-ladder-problem-2/
-
-DP
+LeetCode: https://leetcode.com/problems/snakes-and-ladders/submissions/
+DP (Wrong solution)
 
 int minThrow(int N, int a[]){
         // code here
@@ -24,10 +24,8 @@ int minThrow(int N, int a[]){
         for(int i=1;i<=6;i++){
             int k =currPos + i;
             if(k<=30){
-                if(delta[k]>=0){ //no point in checking if we're bitten by snake
                     k+=delta[k];
                     minThrow = min(minThrow,minPath(k,delta,memoiz));
-                }
             }
         }
         return memoiz[currPos]=1+minThrow;
