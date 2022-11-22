@@ -1,6 +1,7 @@
 BFS: Graph Traversal, queue
 DFS: Graph Traversal, stack, recursion
 Single Source Shortest Path: BFS
-Snakes and ladders: DP, SSSP
+Snakes and ladders: SSSP
 Find the number of islands: Graph Traversal
 Cycle detection: DFS traversal
+Travelling Salesman Problem: Graph, Bitmasking, DP, Recursion

@@ -1,13 +1,13 @@
-Eg Graph: 0<->1,0<->2,0<->3,1<->2,2<->3,1<->3
+Eg Graph: 0<->1 (8),0<->2 (3),0<->3 (5),1<->2 (7),2<->3 (2),1<->3 (6)
 
 int Prim_MST(int startNode, vector<pair<int,int>> graph[]){
     
     //min-heap
     //store active edges
     //it will always return active edge with smallest cost
-    priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> > q;
+    priority_queue< pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>> > Q;
     
-    //1->part of MST set, 0->yet to be visited
+    // 1->part of MST set, 0->yet to be visited
     bool visited[n];
     memset(visited,false,sizeof(visited));
     

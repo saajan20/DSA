@@ -14,7 +14,10 @@ bool dfs(vector<int> adj[],int curr,int parent)
 		if(cycleInNeighbour)
 		return true;
 		}
-          else if(x!=parent) //cycle present at current node
+	   // If an adjacent vertex is visited and
+          // is not parent of current vertex,
+          // then there exists a cycle in the graph.
+          else if(x!=parent) 
 		return true;
     }
     return false; // no cycle at current node or neighbour
